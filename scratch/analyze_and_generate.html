@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background: #222; color: #fff; font-family: sans-serif; }
+    canvas { border: 1px solid #555; }
+  </style>
+</head>
+<body>
+  <h3>Analyzing and Generating Card...</h3>
+  <canvas id="canvas" width="512" height="512"></canvas>
+  <div id="status">Starting...</div>
+  <div id="result" style="display:none;"></div>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+    async function run() {
+      try {
+        // Load base image
+        const baseImg = new Image();
+        baseImg.src = '../public/assets/CARD.png';
+        await new Promise((resolve) => baseImg.onload = resolve);
+        ctx.drawImage(baseImg, 0, 0);
+
+        // Find placeholder on the right card (x > 256)
+        const imgData = ctx.getImageData(0, 0, 512, 512);
+        const pixels = imgData.data;
+
+        // Find placeholder bounding box on right side
+        let minX = 512, maxX = 0, minY = 512, maxY = 0;
+        for (let y = 0; y < 512; y++) {
+          for (let x = 256; x < 512; x++) {
+            const idx = (y * 512 + x) * 4;
+            const r = pixels[idx];
+            const g = pixels[idx+1];
+            const b = pixels[idx+2];
+
+            // Detect sky blue or grass green or white cloud
+            const isSky = (r > 150 && r < 210 && g > 200 && g < 240 && b > 230 && b < 255);
+            const isGrass = (r > 100 && r < 160 && g > 140 && g < 200 && b < 50);
+            const isCloud = (r > 240 && g > 240 && b > 240 && y > 100 && y < 200 && x > 280 && x < 450);
+
+            if (isSky || isGrass || isCloud) {
+              if (x < minX) minX = x;
+              if (x > maxX) maxX = x;
+              if (y < minY) minY = y;
+              if (y > maxY) maxY = y;
+            }
+          }
+        }
+
+        // If detection failed or was inaccurate, use fallback coordinates
+        if (minX >= maxX || minY >= maxY || minX < 260) {
+          minX = 286;
+          maxX = 472;
+          minY = 104;
+          maxY = 284;
+        }
+
+        const width = maxX - minX + 1;
+        const height = maxY - minY + 1;
+        document.getElementById('status').innerText = `Detected placeholder: x=${minX}, y=${minY}, w=${width}, h=${height}`;
+
+        // Load user photo
+        const photoImg = new Image();
+        photoImg.src = '../public/assets/Foto Fachry.jpeg';
+        await new Promise((resolve) => photoImg.onload = resolve);
+
+        // Draw photo cropped to fit the bounding box
+        ctx.save();
+        
+        // Create clipping path for rounded rectangle placeholder
+        const radius = 16;
+        ctx.beginPath();
+        ctx.moveTo(minX + radius, minY);
+        ctx.lineTo(maxX - radius, minY);
+        ctx.quadraticCurveTo(maxX, minY, maxX, minY + radius);
+        ctx.lineTo(maxX, maxY - radius);
+        ctx.quadraticCurveTo(maxX, maxY, maxX - radius, maxY);
+        ctx.lineTo(minX + radius, maxY);
+        ctx.quadraticCurveTo(minX, maxY, minX, maxY - radius);
+        ctx.lineTo(minX, minY + radius);
+        ctx.quadraticCurveTo(minX, minY, minX + radius, minY);
+        ctx.closePath();
+        ctx.clip();
+
+        // Draw photo with cover behavior
+        const photoAspect = photoImg.width / photoImg.height;
+        const targetAspect = width / height;
+        let drawW, drawH, drawX, drawY;
+        if (photoAspect > targetAspect) {
+          drawH = height;
+          drawW = height * photoAspect;
+          drawX = minX + (width - drawW) / 2;
+          drawY = minY;
+        } else {
+          drawW = width;
+          drawH = width / photoAspect;
+          drawX = minX;
+          drawY = minY + (height - drawH) / 2;
+        }
+        ctx.drawImage(photoImg, drawX, drawY, drawW, drawH);
+        ctx.restore();
+
+        // Clear the "Nama Kalian" text area
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(270, 320, 220, 50);
+
+        // Draw User Name
+        ctx.fillStyle = '#000000';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText('Fachry Fariska Ilham', 380, 345);
+
+        // Set result
+        document.getElementById('result').innerText = canvas.toDataURL('image/png');
+        document.getElementById('status').innerText = 'Done!';
+      } catch (e) {
+        document.getElementById('status').innerText = 'Error: ' + e.message;
+        console.error(e);
+      }
+    }
+
+    run();
+  </script>
+</body>
+</html>

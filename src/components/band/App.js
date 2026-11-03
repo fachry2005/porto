@@ -2,6 +2,7 @@
 import './index.css';
 import * as THREE from 'three';
 import React, { useEffect, useRef, useState } from 'react';
+import { useTheme } from '@/context/ThemeContext';
 import { Canvas, extend, useThree, useFrame } from '@react-three/fiber';
 import {
   useGLTF,
@@ -23,9 +24,11 @@ extend({ MeshLineGeometry, MeshLineMaterial });
 
 const GLTF_PATH = '/assets/kartu.glb';
 const TEXTURE_PATH = '/assets/bandd.png';
+const CARD_PHOTO_PATH = '/assets/Foto Fachry 2.png';
 
 useGLTF.preload(GLTF_PATH);
 useTexture.preload(TEXTURE_PATH);
+useTexture.preload(CARD_PHOTO_PATH);
 
 export default function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -113,6 +116,7 @@ function Scene({ isMobile }) {
 }
 
 function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
+  const { theme } = useTheme();
   const band = useRef();
   const fixed = useRef();
   const j1 = useRef();
@@ -135,6 +139,7 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
 
   const { nodes, materials } = useGLTF(GLTF_PATH);
   const texture = useTexture(TEXTURE_PATH);
+  const cardPhoto = useTexture(CARD_PHOTO_PATH);
   const { width, height } = useThree((state) => state.size);
 
   const [curve] = useState(
@@ -223,6 +228,9 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
   curve.curveType = 'chordal';
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
+  // Apply photo texture to card material
+  cardPhoto.flipY = false;
+
   return (
     <>
       <group position={[3, 4, 0]}>
@@ -260,7 +268,10 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
             }}
           >
             <mesh geometry={nodes.card.geometry}>
-              <meshPhysicalMaterial {...materials.base} />
+              <meshPhysicalMaterial
+                {...materials.base}
+                map={cardPhoto}
+              />
             </mesh>
             <mesh geometry={nodes.clip.geometry} material={materials.metal} />
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
@@ -273,7 +284,7 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
         <meshLineMaterial
           transparent
           opacity={0.9}
-          color="white"
+          color={theme === 'light' ? '#334155' : 'white'}
           depthTest={false}
           resolution={[width, height]}
           useMap

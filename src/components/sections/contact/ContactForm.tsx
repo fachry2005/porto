@@ -13,8 +13,6 @@ import {
   FaLinkedinIn,
   FaInstagram,
   FaGithub,
-  FaYoutube,
-  FaTiktok,
 } from 'react-icons/fa'
 
 const smoothEase: [number, number, number, number] = [
@@ -42,27 +40,15 @@ const fieldVariants: Variants = {
 const socialLinks = [
   {
     title: 'Instagram',
-    user: '@instagram',
+    user: '@fachryfrs',
     icon: FaInstagram,
-    link: 'ISINYA LINK INSTAGRAM',
-  },
-  {
-    title: 'Youtube',
-    user: '@youtube',
-    icon: FaYoutube,
-    link: 'ISINYA LINK YOUTUBE',
+    link: 'https://www.instagram.com/fachryfrs/',
   },
   {
     title: 'Github',
-    user: '@github',
+    user: '@fachry2005',
     icon: FaGithub,
-    link: 'ISINYA LINK GITHUB',
-  },
-  {
-    title: 'TikTok',
-    user: '@tiktok',
-    icon: FaTiktok,
-    link: 'ISINYA LINK TIKTOK',
+    link: 'https://github.com/fachry2005',
   },
 ]
 
@@ -73,7 +59,7 @@ export default function ContactForm() {
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, ease: smoothEase }}
       viewport={{ once: false, amount: 0.2 }}
-      className="rounded-[28px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 md:p-8 flex flex-col h-full"
+      className="rounded-[28px] border border-[var(--border)] bg-[var(--bg-card)] backdrop-blur-xl p-5 md:p-8 flex flex-col h-full shadow-[var(--card-shadow)]"
     >
       {/* HEADER */}
       <motion.div
@@ -83,11 +69,11 @@ export default function ContactForm() {
         viewport={{ once: false }}
         transition={{ delay: 0.05 }}
       >
-        <h2 className="text-2xl md:text-3xl font-bold mb-3">
+        <h2 className="text-2xl md:text-3xl font-bold mb-3 text-[var(--text-primary)]">
           Hubungi Saya
         </h2>
 
-        <p className="text-sm text-white/50 mb-7">
+        <p className="text-sm text-[var(--text-secondary)] mb-7">
           Feel free to reach out if you want to collaborate,
           discuss ideas, or simply say hello.
         </p>
@@ -104,11 +90,11 @@ export default function ContactForm() {
           transition={{ delay: 0.1 }}
         >
           <div className="relative">
-            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
+            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
 
             <input
               placeholder="Your Name"
-              className="w-full rounded-2xl border border-white/15 bg-black/20 pl-12 pr-4 py-4 outline-none transition duration-200 focus:border-white focus:ring-1 focus:ring-white/40"
+              className="w-full rounded-2xl border border-[var(--border)] bg-[var(--bg-input)] pl-12 pr-4 py-4 outline-none transition duration-200 focus:border-[var(--text-primary)] text-[var(--text-primary)]"
             />
           </div>
         </motion.div>
@@ -122,11 +108,11 @@ export default function ContactForm() {
           transition={{ delay: 0.16 }}
         >
           <div className="relative">
-            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
+            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
 
             <input
               placeholder="Your Email"
-              className="w-full rounded-2xl border border-white/15 bg-black/20 pl-12 pr-4 py-4 outline-none transition duration-200 focus:border-white focus:ring-1 focus:ring-white/40"
+              className="w-full rounded-2xl border border-[var(--border)] bg-[var(--bg-input)] pl-12 pr-4 py-4 outline-none transition duration-200 focus:border-[var(--text-primary)] text-[var(--text-primary)]"
             />
           </div>
         </motion.div>
@@ -140,12 +126,12 @@ export default function ContactForm() {
           transition={{ delay: 0.22 }}
         >
           <div className="relative">
-            <MessageSquare className="absolute left-4 top-5 text-white/40" />
+            <MessageSquare className="absolute left-4 top-5 text-[var(--text-muted)]" />
 
             <textarea
               rows={5}
               placeholder="Your Message"
-              className="w-full rounded-2xl border border-white/15 bg-black/20 pl-12 pr-4 py-4 outline-none resize-none transition duration-200 focus:border-white focus:ring-1 focus:ring-white/40"
+              className="w-full rounded-2xl border border-[var(--border)] bg-[var(--bg-input)] pl-12 pr-4 py-4 outline-none resize-none transition duration-200 focus:border-[var(--text-primary)] text-[var(--text-primary)]"
             />
           </div>
         </motion.div>
@@ -158,11 +144,11 @@ export default function ContactForm() {
           viewport={{ once: false }}
           transition={{ delay: 0.28 }}
           whileHover={{
-            scale: 1.06,
+            scale: 1.04,
             transition: { duration: 0.12 },
           }}
           whileTap={{ scale: 0.97 }}
-          className="w-full rounded-2xl py-4 bg-white/10 border border-white/10 flex items-center justify-center gap-2"
+          className="w-full rounded-2xl py-4 bg-[var(--button-primary-bg)] text-[var(--button-primary-text)] font-semibold border border-[var(--border)] flex items-center justify-center gap-2 shadow-sm"
         >
           <Send size={16} />
           Send Message
@@ -170,21 +156,21 @@ export default function ContactForm() {
       </div>
 
       {/* SOCIAL */}
-      <div className="border-t border-white/10 pt-5 mt-6">
+      <div className="border-t border-[var(--border)] pt-5 mt-6">
         <motion.p
           variants={fieldVariants}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false }}
           transition={{ delay: 0.34 }}
-          className="text-sm text-white/55 mb-4"
+          className="text-sm text-[var(--text-secondary)] mb-4 font-medium"
         >
           Connect With Me
         </motion.p>
 
         {/* LINKEDIN */} 
         <motion.a
-          href="isinya LINK LINKEDIN"  
+          href="https://www.linkedin.com/in/fachry-fariska-ilham-420b99294"  
           target="_blank"
           rel="noopener noreferrer"
           variants={fieldVariants}
@@ -193,24 +179,22 @@ export default function ContactForm() {
           viewport={{ once: false }}
           transition={{ delay: 0.36 }}
           whileHover={{
-            scale: 1.05,
+            scale: 1.03,
             transition: { duration: 0.12 },
           }}
-          className="group relative overflow-hidden rounded-2xl border border-white/10 bg-black/20 p-4 mb-3 flex items-center justify-between"
+          className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-input)] p-4 mb-3 flex items-center justify-between transition-all"
         >
-          <div className="absolute inset-0 bg-white/[0.04] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-
-          <div className="relative z-10 flex items-center gap-3">
+          <div className="relative z-10 flex items-center gap-3 text-[var(--text-primary)]">
             <FaLinkedinIn />
 
             <div>
               <p className="text-sm font-medium">LinkedIn</p>
-              <p className="text-xs text-white/35">@linkedin</p>
+              <p className="text-xs text-[var(--text-muted)]">Fachry Fariska Ilham</p>
             </div>
           </div>
 
           <div className="relative z-10 opacity-0 group-hover:opacity-100 transition">
-            <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center">
+            <div className="w-7 h-7 rounded-lg bg-[var(--button-secondary-bg)] flex items-center justify-center text-[var(--text-primary)]">
               <ArrowUpRight size={14} />
             </div>
           </div>
@@ -235,26 +219,24 @@ export default function ContactForm() {
                   delay: 0.42 + i * 0.05,
                 }}
                 whileHover={{
-                  scale: 1.06,
+                  scale: 1.04,
                   transition: { duration: 0.12 },
                 }}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-black/20 p-3 flex items-center justify-between"
+                className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-input)] p-3 flex items-center justify-between transition-all"
               >
-                <div className="absolute inset-0 bg-white/[0.04] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-
-                <div className="relative z-10 flex items-center gap-3">
+                <div className="relative z-10 flex items-center gap-3 text-[var(--text-primary)]">
                   <Icon />
 
                   <div>
-                    <p className="text-sm">{item.title}</p>
-                    <p className="text-[11px] text-white/35">
+                    <p className="text-sm font-medium">{item.title}</p>
+                    <p className="text-[11px] text-[var(--text-muted)]">
                       {item.user}
                     </p>
                   </div>
                 </div>
 
                 <div className="relative z-10 opacity-0 group-hover:opacity-100 transition">
-                  <div className="w-6 h-6 rounded-md bg-white/10 flex items-center justify-center">
+                  <div className="w-6 h-6 rounded-md bg-[var(--button-secondary-bg)] flex items-center justify-center text-[var(--text-primary)]">
                     <ArrowUpRight size={12} />
                   </div>
                 </div>

@@ -19,7 +19,7 @@ export default function ContactSection() {
       px-5 sm:px-6 md:px-10 lg:px-20
       pt-20 sm:pt-24 lg:pt-28 
       pb-24 sm:pb-28 lg:pb-36 
-      text-white"
+      text-[var(--text-primary)]"
     >
       {/* HEADER */}
 <motion.div
@@ -44,7 +44,7 @@ export default function ContactSection() {
       ease: 'easeInOut',
     }}
     viewport={{ once: false }}
-    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4"
+    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 text-[var(--text-primary)]"
   >
     Contact Me
   </motion.h1>
@@ -61,7 +61,7 @@ export default function ContactSection() {
       ease: 'easeInOut',
     }}
     viewport={{ once: false }}
-    className="text-white/60 text-sm sm:text-base max-w-xl sm:max-w-2xl mx-auto leading-relaxed"
+    className="text-[var(--text-secondary)] text-sm sm:text-base max-w-xl sm:max-w-2xl mx-auto leading-relaxed"
   >
     Have something in mind? Send a message and let's connect.
   </motion.p>
@@ -88,8 +88,8 @@ export default function ContactSection() {
         </div>
       </div>
  {/* COPYRIGHT */}
-<div className="mt-20 text-center text-xs text-white/35">
-  © 2026 Rifqi Muhammad Aliya — All rights reserved.
+<div className="mt-20 text-center text-xs text-[var(--text-muted)]">
+  © 2026 Fachry Fariska Ilham — All rights reserved.
 </div>
     </section>
   )

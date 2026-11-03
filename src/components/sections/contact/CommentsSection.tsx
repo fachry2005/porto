@@ -74,15 +74,15 @@ export default function CommentsSection() {
         ease: smoothEase,
       }}
       viewport={{ once: false, amount: 0.2 }}
-      className="rounded-[28px] md:rounded-[34px] border border-white/10 bg-white/5 backdrop-blur-xl p-5 md:p-8 h-full"
+      className="rounded-[28px] md:rounded-[34px] border border-[var(--border)] bg-[var(--bg-card)] backdrop-blur-xl p-5 md:p-8 h-full shadow-[var(--card-shadow)]"
     >
       {/* HEADER */}
       <div className="mb-5 md:mb-6">
-        <h3 className="text-xl md:text-2xl font-semibold mb-1">
+        <h3 className="text-xl md:text-2xl font-semibold mb-1 text-[var(--text-primary)]">
           Comments
         </h3>
 
-        <p className="text-xs md:text-sm text-white/40">
+        <p className="text-xs md:text-sm text-[var(--text-secondary)]">
           Leave your thoughts here
         </p>
       </div>
@@ -100,7 +100,7 @@ export default function CommentsSection() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Your Name"
-          className="w-full rounded-2xl border border-white/15 bg-black/20 px-4 py-3 md:py-4 outline-none focus:border-white"
+          className="w-full rounded-2xl border border-[var(--border)] bg-[var(--bg-input)] px-4 py-3 md:py-4 outline-none focus:border-[var(--text-primary)] text-[var(--text-primary)]"
         />
 
         <motion.textarea
@@ -109,16 +109,16 @@ export default function CommentsSection() {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="Your Comment"
-          className="w-full rounded-2xl border border-white/15 bg-black/20 px-4 py-3 md:py-4 outline-none resize-none focus:border-white"
+          className="w-full rounded-2xl border border-[var(--border)] bg-[var(--bg-input)] px-4 py-3 md:py-4 outline-none resize-none focus:border-[var(--text-primary)] text-[var(--text-primary)]"
         />
 
         <motion.label
           variants={itemVariants}
-          className="rounded-2xl border border-dashed border-white/15 bg-black/20 p-3 md:p-4 flex items-center gap-3 cursor-pointer"
+          className="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--bg-input)] p-3 md:p-4 flex items-center gap-3 cursor-pointer text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
         >
           <Upload size={16} />
 
-          <span className="text-xs md:text-sm text-white/65">
+          <span className="text-xs md:text-sm font-medium">
             Upload Image
           </span>
 
@@ -138,7 +138,7 @@ export default function CommentsSection() {
               exit={{ opacity: 0 }}
               src={preview}
               alt="Preview"
-              className="rounded-2xl h-36 md:h-44 w-full object-cover border border-white/10"
+              className="rounded-2xl h-36 md:h-44 w-full object-cover border border-[var(--border)]"
             />
           )}
         </AnimatePresence>
@@ -149,7 +149,7 @@ export default function CommentsSection() {
           whileTap={{ scale: 0.98 }}
           onClick={handleSubmit}
           disabled={loading}
-          className="w-full rounded-2xl py-3 md:py-4 bg-white/10 border border-white/10 transition-all"
+          className="w-full rounded-2xl py-3 md:py-4 bg-[var(--button-primary-bg)] text-[var(--button-primary-text)] font-semibold border border-[var(--border)] transition-all shadow-sm"
         >
           {loading ? 'Posting...' : 'Post Comment'}
         </motion.button>
@@ -161,7 +161,7 @@ export default function CommentsSection() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: false }}
-        className="rounded-[24px] md:rounded-[28px] border border-white/10 bg-black/20 p-3 h-[320px] md:h-[420px] overflow-y-auto custom-scroll"
+        className="rounded-[24px] md:rounded-[28px] border border-[var(--border)] bg-[var(--bg-input)] p-3 h-[320px] md:h-[420px] overflow-y-auto custom-scroll"
       >
         <div className="space-y-3">
           <AnimatePresence initial={false}>
@@ -196,30 +196,30 @@ export default function CommentsSection() {
                 }}
                 className={`rounded-[20px] md:rounded-[24px] border p-3 md:p-4 ${
                   item.is_pinned
-                    ? 'border-purple-500/30 bg-purple-500/5'
-                    : 'border-white/10 bg-white/[0.03]'
+                    ? 'border-purple-500/40 bg-purple-500/10'
+                    : 'border-[var(--border)] bg-[var(--bg-card)]'
                 }`}
               >
                 <div className="flex gap-3">
-                  <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center text-xs font-semibold shrink-0">
+                  <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[var(--button-secondary-bg)] border border-[var(--border)] flex items-center justify-center text-xs font-semibold shrink-0 text-[var(--text-primary)]">
                     {item.name?.charAt(0)}
                   </div>
 
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <p className="text-sm font-medium">
+                      <p className="text-sm font-medium text-[var(--text-primary)]">
                         {item.name}
                       </p>
 
                       {item.is_pinned && (
-                        <div className="flex items-center gap-1 px-2 py-[3px] rounded-full bg-purple-500/15 border border-purple-500/20 text-[10px] text-purple-300">
+                        <div className="flex items-center gap-1 px-2 py-[3px] rounded-full bg-purple-500/15 border border-purple-500/20 text-[10px] text-purple-500 dark:text-purple-300 font-semibold">
                           <Pin size={10} />
                           PINNED
                         </div>
                       )}
                     </div>
 
-                    <p className="text-[12px] md:text-[13px] text-white/55">
+                    <p className="text-[12px] md:text-[13px] text-[var(--text-secondary)] leading-relaxed">
                       {item.comment}
                     </p>
 
@@ -227,7 +227,7 @@ export default function CommentsSection() {
                       <img
                         src={item.image_url}
                         alt="Comment"
-                        className="mt-3 rounded-xl w-full max-h-48 md:max-h-56 object-cover border border-white/10"
+                        className="mt-3 rounded-xl w-full max-h-48 md:max-h-56 object-cover border border-[var(--border)]"
                       />
                     )}
                   </div>
@@ -236,7 +236,7 @@ export default function CommentsSection() {
                     onClick={() =>
                       likeComment(item.id, item.likes)
                     }
-                    className="flex items-center gap-1 text-[11px] text-white/40 hover:text-white transition-colors"
+                    className="flex items-center gap-1 text-[11px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
                   >
                     <Heart size={13} />
                     {item.likes || 0}

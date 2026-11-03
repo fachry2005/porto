@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { Sun, Moon } from 'lucide-react'
+import { useTheme } from '@/context/ThemeContext'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -9,6 +11,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const [mounted, setMounted] = useState(false)
+  const { theme, toggleTheme } = useTheme()
 
   // 🔥 navbar muncul sekali aja
   const [showNavbar, setShowNavbar] = useState(false)
@@ -146,14 +149,15 @@ export default function Navbar() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '10px 30px',
+          padding: '10px 24px',
           width: '100%',
           borderRadius: 999,
           backgroundColor: scrolled
-            ? 'rgba(13,13,13,0.85)'
-            : 'rgba(13,13,13,0.5)',
+            ? 'var(--nav-bg-scrolled)'
+            : 'var(--nav-bg-top)',
           backdropFilter: 'blur(12px)',
           border: '1px solid var(--border)',
+          transition: 'background-color 0.3s ease, border-color 0.3s ease',
         }}
       >
         <span
@@ -164,11 +168,11 @@ export default function Navbar() {
             letterSpacing: '0.1em',
           }}
         >
-          rifqi.dev
+          fachry.dev
         </span>
 
         {!isMobile && (
-          <div style={{ display: 'flex', gap: 40 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
             {navItems.map((item) => {
               const isActive = activeSection === item.id
 
@@ -200,7 +204,7 @@ export default function Navbar() {
                       left: 0,
                       width: '100%',
                       height: 1,
-                      background: 'white',
+                      background: 'var(--text-primary)',
                       transform: isActive
                         ? 'scaleX(1)'
                         : 'scaleX(0)',
@@ -211,22 +215,72 @@ export default function Navbar() {
                 </a>
               )
             })}
+
+            {/* THEME TOGGLE BUTTON DESKTOP */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle Theme"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 34,
+                height: 34,
+                borderRadius: '50%',
+                border: '1px solid var(--border)',
+                background: 'var(--button-secondary-bg)',
+                color: 'var(--text-primary)',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              {theme === 'dark' ? (
+                <Sun size={15} className="text-yellow-400" />
+              ) : (
+                <Moon size={15} className="text-slate-700" />
+              )}
+            </button>
           </div>
         )}
 
         {isMobile && (
-          <div
-            onClick={() => setOpen(!open)}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 4,
-              cursor: 'pointer',
-            }}
-          >
-            <span style={{ width: 20, height: 2, background: 'white' }} />
-            <span style={{ width: 20, height: 2, background: 'white' }} />
-            <span style={{ width: 20, height: 2, background: 'white' }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle Theme"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 32,
+                height: 32,
+                borderRadius: '50%',
+                border: '1px solid var(--border)',
+                background: 'var(--button-secondary-bg)',
+                color: 'var(--text-primary)',
+                cursor: 'pointer',
+              }}
+            >
+              {theme === 'dark' ? (
+                <Sun size={14} className="text-yellow-400" />
+              ) : (
+                <Moon size={14} className="text-slate-700" />
+              )}
+            </button>
+
+            <div
+              onClick={() => setOpen(!open)}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 4,
+                cursor: 'pointer',
+              }}
+            >
+              <span style={{ width: 20, height: 2, background: 'var(--text-primary)' }} />
+              <span style={{ width: 20, height: 2, background: 'var(--text-primary)' }} />
+              <span style={{ width: 20, height: 2, background: 'var(--text-primary)' }} />
+            </div>
           </div>
         )}
       </div>
@@ -239,7 +293,7 @@ export default function Navbar() {
           style={{
             marginTop: 10,
             borderRadius: 16,
-            background: 'rgba(13,13,13,0.9)',
+            background: 'var(--nav-bg-scrolled)',
             border: '1px solid var(--border)',
             backdropFilter: 'blur(12px)',
             padding: 20,

@@ -37,14 +37,14 @@ const AnimatedBackground = () => {
   }, [])
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none transition-colors duration-500">
       <div className="absolute inset-0">
         {/* kiri atas */}
         <div
           ref={(ref) => {
             blobRefs.current[0] = ref
           }}
-          className="absolute top-10 left-10 w-40 h-40 md:w-56 md:h-56 rounded-full bg-white blur-[90px] opacity-30"
+          className="absolute top-10 left-10 w-40 h-40 md:w-56 md:h-56 rounded-full bg-[var(--blob-color-1)] blur-[90px] opacity-[var(--blob-opacity-1)] transition-all duration-500"
         />
 
         {/* kanan atas */}
@@ -52,7 +52,7 @@ const AnimatedBackground = () => {
           ref={(ref) => {
             blobRefs.current[1] = ref
           }}
-          className="absolute top-10 right-10 w-40 h-40 md:w-56 md:h-56 rounded-full bg-zinc-300 blur-[100px] opacity-25"
+          className="absolute top-10 right-10 w-40 h-40 md:w-56 md:h-56 rounded-full bg-[var(--blob-color-2)] blur-[100px] opacity-[var(--blob-opacity-2)] transition-all duration-500"
         />
 
         {/* kiri bawah */}
@@ -60,7 +60,7 @@ const AnimatedBackground = () => {
           ref={(ref) => {
             blobRefs.current[2] = ref
           }}
-          className="absolute bottom-10 left-10 w-44 h-44 md:w-60 md:h-60 rounded-full bg-zinc-400 blur-[110px] opacity-30"
+          className="absolute bottom-10 left-10 w-44 h-44 md:w-60 md:h-60 rounded-full bg-[var(--blob-color-2)] blur-[110px] opacity-[var(--blob-opacity-1)] transition-all duration-500"
         />
 
         {/* kanan bawah */}
@@ -68,12 +68,18 @@ const AnimatedBackground = () => {
           ref={(ref) => {
             blobRefs.current[3] = ref
           }}
-          className="absolute bottom-10 right-10 w-40 h-40 md:w-56 md:h-56 rounded-full bg-white blur-[100px] opacity-20"
+          className="absolute bottom-10 right-10 w-40 h-40 md:w-56 md:h-56 rounded-full bg-[var(--blob-color-1)] blur-[100px] opacity-[var(--blob-opacity-2)] transition-all duration-500"
         />
       </div>
 
       {/* GRID */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:26px_26px]" />
+      <div
+        className="absolute inset-0 bg-[size:26px_26px] transition-all duration-500"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px)',
+        }}
+      />
     </div>
   )
 }

@@ -172,9 +172,9 @@ export default function About() {
                   color: "var(--text-primary)",
                 }}
               >
-                <div>Rifqi</div>
-                <div>Muhammad</div>
-                <div>Aliya</div>
+                <div>Fachry</div>
+                <div>Fariska</div>
+                <div>Ilham</div>
               </div>
             </motion.div>
 
@@ -198,10 +198,7 @@ export default function About() {
                 maxWidth: isMobile ? "100%" : "490px",
               }}
             >
-              Fresh Graduate SMK Rekayasa Perangkat Lunak lulusan 2026 dengan
-              passion di bidang frontend development dan UI modern. Berfokus
-              pada pembuatan website clean, responsif, dan visual yang kuat
-              untuk menghadirkan pengalaman digital yang optimal.
+              Mahasiswa Sistem Informasi di Institut Teknologi Sepuluh Nopember (ITS) angkatan 2023 yang memiliki minat pada pengembangan web dan teknologi modern. Berfokus pada pembuatan aplikasi yang responsif, efisien, dan berorientasi pada pengalaman pengguna melalui pengembangan frontend maupun backend.
             </motion.p>
 
             {/* QUOTE */}
@@ -245,7 +242,7 @@ export default function About() {
             >
               {/* DOWNLOAD CV */}
               <a
-                href="https://drive.google.com/file/d/1cFqZ0TY0U0I51K0Tchv8E4sbOv5yAZ9x/view?usp=drive_link"
+                href="https://drive.google.com/file/d/1Br2zWP5zheORGYKaku0zaMX1b23XTYwC/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ textDecoration: "none" }}
@@ -257,9 +254,9 @@ export default function About() {
                     gap: 6,
                     padding: "10px 18px",
                     borderRadius: 8,
-                    border: "1px solid white",
-                    background: "white",
-                    color: "black",
+                    border: "1px solid var(--button-primary-bg)",
+                    background: "var(--button-primary-bg)",
+                    color: "var(--button-primary-text)",
                     fontSize: 13,
                     fontWeight: 600,
                     cursor: "pointer",
@@ -289,9 +286,9 @@ export default function About() {
                   gap: 6,
                   padding: "10px 18px",
                   borderRadius: 8,
-                  border: "1px solid white",
-                  background: "transparent",
-                  color: "white",
+                  border: "1px solid var(--border-subtle)",
+                  background: "var(--button-secondary-bg)",
+                  color: "var(--text-primary)",
                   fontSize: 13,
                   fontWeight: 600,
                   cursor: "pointer",
@@ -324,28 +321,25 @@ export default function About() {
                 width: "48%",
                 display: "flex",
                 justifyContent: "flex-end",
+                alignItems: "center",
               }}
             >
-              <div
+              {/* Natural blended photo - fades into dark background */}
+              <img
+                src="/assets/Foto Fachry 2.png"
+                alt="Fachry Fariska Ilham"
                 style={{
-                  padding: 12,
-                  borderRadius: "50%",
-                  border: "1px solid var(--border)",
-                  transform: "translateX(-80px)",
+                  width: 210,
+                  height: "auto",
+                  display: "block",
+                  transform: "translateX(-30px)",
+                  WebkitMaskImage:
+                    "radial-gradient(ellipse 80% 88% at 50% 38%, black 30%, transparent 75%)",
+                  maskImage:
+                    "radial-gradient(ellipse 80% 88% at 50% 38%, black 30%, transparent 75%)",
+                  filter: "brightness(0.95)",
                 }}
-              >
-                <img
-                  src="/assets/image.png"
-                  alt="Profile"
-                  style={{
-                    width: 240,
-                    height: 240,
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                    display: "block",
-                  }}
-                />
-              </div>
+              />
             </motion.div>
           )}
         </div>
