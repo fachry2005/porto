@@ -324,20 +324,19 @@ export default function About() {
                 alignItems: "center",
               }}
             >
-              {/* Natural blended photo - fades into dark background */}
+              {/* Natural blended photo - transparent background */}
               <img
-                src="/assets/Foto Fachry 2.png"
+                src="/assets/Foto Fachry About.png"
                 alt="Fachry Fariska Ilham"
                 style={{
-                  width: 210,
+                  width: 220,
                   height: "auto",
                   display: "block",
-                  transform: "translateX(-30px)",
+                  transform: "translateX(-20px)",
                   WebkitMaskImage:
-                    "radial-gradient(ellipse 80% 88% at 50% 38%, black 30%, transparent 75%)",
+                    "linear-gradient(to bottom, black 82%, transparent 100%)",
                   maskImage:
-                    "radial-gradient(ellipse 80% 88% at 50% 38%, black 30%, transparent 75%)",
-                  filter: "brightness(0.95)",
+                    "linear-gradient(to bottom, black 82%, transparent 100%)",
                 }}
               />
             </motion.div>
