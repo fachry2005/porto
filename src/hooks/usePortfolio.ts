@@ -56,6 +56,14 @@ export const localCertificatesData = [
     skills: 'HTML5, CSS3, Responsive Web Design, Flexbox, CSS Grid, Web Accessibility, Front-End Development.',
     image_url: '/assets/freecodecamp-rwd.jpg',
   },
+  {
+    id: 'myskill-figma-uiux-cert',
+    title: 'MySkill – Figma for UI/UX Design',
+    subtitle: 'Certificate of Course Completion • November 2026',
+    credential_id: '345372/UIX/LM/10/2048',
+    skills: 'Figma, UI Design, UX Design, Wireframing, Prototyping, Design Systems, User Research.',
+    image_url: '/assets/myskill-figma-uiux.png',
+  },
 ]
 
 export default function usePortfolio() {
@@ -102,11 +110,13 @@ export default function usePortfolio() {
     if (cachedCertificates) {
       try {
         const parsed = JSON.parse(cachedCertificates)
-        const hasMyskill = parsed.some((c: any) => c.id === 'myskill-lovable-ai-cert')
-        setCertificates(hasMyskill ? parsed : [...localCertificatesData, ...parsed.filter((c: any) => c.id !== 'devnet-local-cert')])
+        const localIds = new Set(localCertificatesData.map((l: any) => l.id))
+        setCertificates([...localCertificatesData, ...parsed.filter((c: any) => !localIds.has(c.id))])
       } catch {
         setCertificates(localCertificatesData)
       }
+    } else {
+      setCertificates(localCertificatesData)
     }
 
     if (cachedTechStacks) {

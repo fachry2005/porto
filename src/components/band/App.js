@@ -24,7 +24,7 @@ extend({ MeshLineGeometry, MeshLineMaterial });
 
 const GLTF_PATH = '/assets/kartu.glb';
 const TEXTURE_PATH = '/assets/bandd.png';
-const CARD_PHOTO_PATH = '/assets/Foto Fachry 2.png';
+const CARD_PHOTO_PATH = '/assets/Foto Fachry 2.png?v=4';
 
 useGLTF.preload(GLTF_PATH);
 useTexture.preload(TEXTURE_PATH);
@@ -230,6 +230,7 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
 
   // Apply photo texture to card material
   cardPhoto.flipY = false;
+  cardPhoto.needsUpdate = true;
 
   return (
     <>
