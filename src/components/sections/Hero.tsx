@@ -6,7 +6,15 @@ import App from "@/components/band/App";
 import TextType from "@/components/band/TextType";
 import Image from "next/image";
 
-const skills = ["Typescript", "React.js", "Tailwind"];
+const skills = [
+  "TypeScript",
+  "JavaScript",
+  "React",
+  "HTML5",
+  "CSS3",
+  "PostgreSQL",
+  "Tailwind",
+];
 
 type HeroProps = {
   showApp: boolean;

@@ -66,6 +66,39 @@ export const localCertificatesData = [
   },
 ]
 
+export const localTechStacksData = [
+  {
+    id: 'tech-javascript',
+    name: 'JavaScript',
+    logo_url: '/assets/tech/javascript.svg',
+  },
+  {
+    id: 'tech-typescript',
+    name: 'TypeScript',
+    logo_url: '/assets/tech/typescript.svg',
+  },
+  {
+    id: 'tech-react',
+    name: 'React',
+    logo_url: '/assets/tech/react.svg',
+  },
+  {
+    id: 'tech-html5',
+    name: 'HTML5',
+    logo_url: '/assets/tech/html5.svg',
+  },
+  {
+    id: 'tech-css',
+    name: 'CSS3',
+    logo_url: '/assets/tech/css.svg',
+  },
+  {
+    id: 'tech-postgresql',
+    name: 'PostgreSQL',
+    logo_url: '/assets/tech/postgresql.svg',
+  },
+]
+
 export default function usePortfolio() {
   const [projects, setProjects] = useState<any[]>([])
   const [certificates, setCertificates] =
@@ -120,9 +153,15 @@ export default function usePortfolio() {
     }
 
     if (cachedTechStacks) {
-      setTechStacks(
-        JSON.parse(cachedTechStacks)
-      )
+      try {
+        const parsed = JSON.parse(cachedTechStacks)
+        const localIds = new Set(localTechStacksData.map((l: any) => l.id))
+        setTechStacks([...localTechStacksData, ...parsed.filter((t: any) => !localIds.has(t.id))])
+      } catch {
+        setTechStacks(localTechStacksData)
+      }
+    } else {
+      setTechStacks(localTechStacksData)
     }
 
     const [
@@ -137,10 +176,15 @@ export default function usePortfolio() {
 
     const allCertificates = [...localCertificatesData, ...(certificatesData || [])]
     const allProjects = [...localProjectsData, ...(projectsData || [])]
+    const localTechIds = new Set(localTechStacksData.map((l: any) => l.id))
+    const allTechStacks = [
+      ...localTechStacksData,
+      ...(techStacksData || []).filter((t: any) => !localTechIds.has(t.id)),
+    ]
 
     setProjects(allProjects)
     setCertificates(allCertificates)
-    setTechStacks(techStacksData || [])
+    setTechStacks(allTechStacks)
 
     sessionStorage.setItem(
       'portfolioProjects',
@@ -154,7 +198,7 @@ export default function usePortfolio() {
 
     sessionStorage.setItem(
       'portfolioTechStacks',
-      JSON.stringify(techStacksData || [])
+      JSON.stringify(allTechStacks)
     )
 
     setLoading(false)
