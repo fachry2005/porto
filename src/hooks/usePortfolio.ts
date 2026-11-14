@@ -34,7 +34,7 @@ export const localCertificatesData = [
   },
   {
     id: 'myskill-lovable-ai-cert',
-    title: 'MySkill – Building Website with Lovable AI',
+    title: 'MySkill Short Class – Building Website with Lovable AI',
     subtitle: 'Certificate of Course Completion • October 2026',
     credential_id: '351513/AFI/LM/11/2026',
     skills: 'Lovable AI, Artificial Intelligence, Web Development, Prompt Engineering, Rapid Prototyping, Front-End Design.',
@@ -58,7 +58,7 @@ export const localCertificatesData = [
   },
   {
     id: 'myskill-figma-uiux-cert',
-    title: 'MySkill – Figma for UI/UX Design',
+    title: 'MySkill Short Class – Figma for UI/UX Design',
     subtitle: 'Certificate of Course Completion • November 2026',
     credential_id: '345372/UIX/LM/10/2048',
     skills: 'Figma, UI Design, UX Design, Wireframing, Prototyping, Design Systems, User Research.',

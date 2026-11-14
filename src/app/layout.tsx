@@ -3,7 +3,7 @@ import RefreshRedirect from '@/components/RefreshRedirect'
 import { ThemeProvider } from '@/context/ThemeContext'
 
 export const metadata = {
-  title: "Fachry Fariska Ilham",
+  title: "Portofolio | Fachry Fariska Ilham",
   description: "Portfolio...",
 };
 

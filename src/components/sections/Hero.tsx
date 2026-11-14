@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import App from "@/components/band/App";
 import TextType from "@/components/band/TextType";
+import Image from "next/image";
 
 const skills = ["Typescript", "React.js", "Tailwind"];
 
@@ -13,6 +14,14 @@ type HeroProps = {
 
 export default function Hero({ showApp }: HeroProps) {
   const [startAnim, setStartAnim] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const heroPlayed = sessionStorage.getItem("heroPlayed");
@@ -51,17 +60,59 @@ export default function Hero({ showApp }: HeroProps) {
         overflow: "hidden",
       }}
     >
-      {/* APP LAYER */}
+      {/* APP LAYER - 3D Card (desktop only) */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           zIndex: 40,
           pointerEvents: showApp ? "auto" : "none",
+          display: isMobile ? "none" : "block",
         }}
       >
-        {showApp && <App />}
+        {showApp && !isMobile && <App />}
       </div>
+
+      {/* MOBILE PHOTO FALLBACK */}
+      {isMobile && showApp && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: -20 }}
+          animate={startAnim ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.9, y: -20 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            position: "absolute",
+            top: 60,
+            right: 16,
+            zIndex: 10,
+          }}
+        >
+          <div
+            style={{
+              width: 110,
+              height: 110,
+              borderRadius: "50%",
+              overflow: "hidden",
+              border: "2px solid var(--border)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+              background: "var(--bg-card)",
+            }}
+          >
+            <Image
+              src="/assets/Foto Fachry Mobile.png"
+              alt="Fachry Fariska Ilham"
+              width={110}
+              height={110}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center top",
+              }}
+              priority
+            />
+          </div>
+        </motion.div>
+      )}
 
       {/* TEXT */}
       <div

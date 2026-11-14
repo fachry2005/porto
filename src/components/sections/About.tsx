@@ -242,9 +242,8 @@ export default function About() {
             >
               {/* DOWNLOAD CV */}
               <a
-                href="https://drive.google.com/file/d/1Br2zWP5zheORGYKaku0zaMX1b23XTYwC/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/assets/CV_Fachry_Fariska_Ilham.pdf"
+                download="CV_Fachry_Fariska_Ilham.pdf"
                 style={{ textDecoration: "none" }}
               >
                 <button
