@@ -97,6 +97,11 @@ export const localTechStacksData = [
     name: 'PostgreSQL',
     logo_url: '/assets/tech/postgresql.svg',
   },
+  {
+    id: 'tech-java',
+    name: 'Java',
+    logo_url: '/assets/tech/java.svg',
+  },
 ]
 
 export default function usePortfolio() {

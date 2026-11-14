@@ -10,6 +10,7 @@ const skills = [
   "TypeScript",
   "JavaScript",
   "React",
+  "Java",
   "HTML5",
   "CSS3",
   "PostgreSQL",
