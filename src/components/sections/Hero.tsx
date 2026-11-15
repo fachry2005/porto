@@ -168,7 +168,7 @@ export default function Hero({ showApp }: HeroProps) {
           initial={false}
           animate={startAnim ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
           transition={{ duration: 0.8, delay: 0.35 }}
-          style={{ marginBottom: 12 }}
+          className="mb-6 md:mb-3"
         >
           <span
             style={{
@@ -199,6 +199,7 @@ export default function Hero({ showApp }: HeroProps) {
               : { opacity: 0, y: 50, scale: 0.96 }
           }
           transition={{ duration: 1, delay: 0.5 }}
+          className="hidden md:block"
           style={{
             marginBottom: 28,
             width: "100%",
