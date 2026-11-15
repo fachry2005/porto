@@ -145,8 +145,8 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
   const posX = isMobile ? Math.min(viewport.width * 0.32, 0.95) : 3;
   const posY = isMobile ? 4.15 : 4;
   const cardScale = isMobile ? 1.25 : 2.25;
-  const ropeDist = isMobile ? 0.62 : 1;
-  const jointOffset = isMobile ? 0.85 : 1.45;
+  const ropeDist = isMobile ? 0.82 : 1;
+  const jointOffset = isMobile ? 0.25 : 1.45;
   const colliderArgs = isMobile ? [0.45, 0.65, 0.01] : [0.8, 1.125, 0.01];
 
   const [curve] = useState(
@@ -243,12 +243,12 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
     <>
       <group position={[posX, posY, 0]}>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
-        <RigidBody position={[isMobile ? 0.25 : 0.5, 0, 0]} ref={j1} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
-        <RigidBody position={[isMobile ? 0.5 : 1, 0, 0]} ref={j2} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
-        <RigidBody position={[isMobile ? 0.75 : 1.5, 0, 0]} ref={j3} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
+        <RigidBody position={[isMobile ? 0.3 : 0.5, 0, 0]} ref={j1} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
+        <RigidBody position={[isMobile ? 0.6 : 1, 0, 0]} ref={j2} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
+        <RigidBody position={[isMobile ? 0.9 : 1.5, 0, 0]} ref={j3} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
 
         <RigidBody
-          position={[isMobile ? 1 : 2, 0, 0]}
+          position={[isMobile ? 1.2 : 2, 0, 0]}
           ref={card}
           {...segmentProps}
           type={dragged ? 'kinematicPosition' : 'dynamic'}
@@ -297,7 +297,7 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
           resolution={[width, height]}
           useMap
           map={texture}
-          repeat={[-4, 1]}
+          repeat={isMobile ? [-3, 1] : [-4, 1]}
           lineWidth={isMobile ? 0.75 : 1}
         />
       </mesh>
