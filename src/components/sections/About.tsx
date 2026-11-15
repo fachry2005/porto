@@ -163,20 +163,57 @@ export default function About() {
               </span>
             </motion.div>
 
-            <motion.div variants={fadeUp}>
-              <div
-                style={{
-                  fontSize: isMobile ? 32 : "clamp(32px,5vw,46px)",
-                  fontWeight: 800,
-                  lineHeight: 1.03,
-                  color: "var(--text-primary)",
-                }}
-              >
-                <div>Fachry</div>
-                <div>Fariska</div>
-                <div>Ilham</div>
-              </div>
-            </motion.div>
+            {/* NAME + MOBILE PHOTO */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "16px",
+              }}
+            >
+              <motion.div variants={fadeUp}>
+                <div
+                  style={{
+                    fontSize: isMobile ? "clamp(26px, 7.5vw, 34px)" : "clamp(32px,5vw,46px)",
+                    fontWeight: 800,
+                    lineHeight: 1.03,
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  <div>Fachry</div>
+                  <div>Fariska</div>
+                  <div>Ilham</div>
+                </div>
+              </motion.div>
+
+              {/* Mobile photo on the right of the name */}
+              {isMobile && (
+                <motion.div
+                  variants={fadeUp}
+                  style={{
+                    flexShrink: 0,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src="/assets/Foto Fachry About.png"
+                    alt="Fachry Fariska Ilham"
+                    style={{
+                      width: "clamp(105px, 28vw, 135px)",
+                      height: "auto",
+                      display: "block",
+                      WebkitMaskImage:
+                        "linear-gradient(to bottom, black 82%, transparent 100%)",
+                      maskImage:
+                        "linear-gradient(to bottom, black 82%, transparent 100%)",
+                    }}
+                  />
+                </motion.div>
+              )}
+            </div>
 
             <motion.p
               variants={{
@@ -309,36 +346,37 @@ export default function About() {
             </motion.div>
           </motion.div>
 
-          {/* isi image/ poto profil */}
-          <motion.div
-            variants={isMobile ? fadeUp : slideLeft}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false }}
-            style={{
-              width: isMobile ? "100%" : "48%",
-              display: "flex",
-              justifyContent: isMobile ? "center" : "flex-end",
-              alignItems: "center",
-              marginTop: isMobile ? 18 : 0,
-            }}
-          >
-            {/* Natural blended photo - transparent background */}
-            <img
-              src="/assets/Foto Fachry About.png"
-              alt="Fachry Fariska Ilham"
+          {/* isi image/ poto profil (desktop only) */}
+          {!isMobile && (
+            <motion.div
+              variants={slideLeft}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: false }}
               style={{
-                width: isMobile ? 190 : 220,
-                height: "auto",
-                display: "block",
-                transform: isMobile ? "none" : "translateX(-20px)",
-                WebkitMaskImage:
-                  "linear-gradient(to bottom, black 82%, transparent 100%)",
-                maskImage:
-                  "linear-gradient(to bottom, black 82%, transparent 100%)",
+                width: "48%",
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
               }}
-            />
-          </motion.div>
+            >
+              {/* Natural blended photo - transparent background */}
+              <img
+                src="/assets/Foto Fachry About.png"
+                alt="Fachry Fariska Ilham"
+                style={{
+                  width: 220,
+                  height: "auto",
+                  display: "block",
+                  transform: "translateX(-20px)",
+                  WebkitMaskImage:
+                    "linear-gradient(to bottom, black 82%, transparent 100%)",
+                  maskImage:
+                    "linear-gradient(to bottom, black 82%, transparent 100%)",
+                }}
+              />
+            </motion.div>
+          )}
         </div>
 
         {/* CARDS */}
