@@ -109,8 +109,7 @@ function Scene({ isMobile }) {
       gravity={[0, -40, 0]}
       timeStep={1 / 60}
     >
-      {/* hanya desktop */}
-      {!isMobile && <Band isMobile={isMobile} />}
+      <Band isMobile={isMobile} />
     </Physics>
   );
 }
@@ -141,6 +140,14 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
   const texture = useTexture(TEXTURE_PATH);
   const cardPhoto = useTexture(CARD_PHOTO_PATH);
   const { width, height } = useThree((state) => state.size);
+  const { viewport } = useThree();
+
+  const posX = isMobile ? Math.min(viewport.width * 0.28, 0.75) : 3;
+  const posY = isMobile ? 3.8 : 4;
+  const cardScale = isMobile ? 1.4 : 2.25;
+  const ropeDist = isMobile ? 0.75 : 1;
+  const jointOffset = isMobile ? 0.95 : 1.45;
+  const colliderArgs = isMobile ? [0.55, 0.78, 0.01] : [0.8, 1.125, 0.01];
 
   const [curve] = useState(
     () =>
@@ -156,10 +163,10 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
   const [hovered, hover] = useState(false);
   const canDrag = !isMobile;
 
-  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
-  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
-  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
-  useSphericalJoint(j3, card, [[0, 0, 0], [0, 1.45, 0]]);
+  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], ropeDist]);
+  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], ropeDist]);
+  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], ropeDist]);
+  useSphericalJoint(j3, card, [[0, 0, 0], [0, jointOffset, 0]]);
 
   useEffect(() => {
     if (hovered && canDrag) {
@@ -234,22 +241,22 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
 
   return (
     <>
-      <group position={[3, 4, 0]}>
+      <group position={[posX, posY, 0]}>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
-        <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
-        <RigidBody position={[1, 0, 0]} ref={j2} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
-        <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
+        <RigidBody position={[isMobile ? 0.25 : 0.5, 0, 0]} ref={j1} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
+        <RigidBody position={[isMobile ? 0.5 : 1, 0, 0]} ref={j2} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
+        <RigidBody position={[isMobile ? 0.75 : 1.5, 0, 0]} ref={j3} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
 
         <RigidBody
-          position={[2, 0, 0]}
+          position={[isMobile ? 1 : 2, 0, 0]}
           ref={card}
           {...segmentProps}
           type={dragged ? 'kinematicPosition' : 'dynamic'}
         >
-          <CuboidCollider args={[0.8, 1.125, 0.01]} />
+          <CuboidCollider args={colliderArgs} />
 
           <group
-            scale={2.25}
+            scale={cardScale}
             position={[0, -1.2, -0.05]}
             onPointerOver={() => canDrag && hover(true)}
             onPointerOut={() => canDrag && hover(false)}
@@ -291,7 +298,7 @@ function Band({ isMobile, maxSpeed = 50, minSpeed = 10 }) {
           useMap
           map={texture}
           repeat={[-4, 1]}
-          lineWidth={1}
+          lineWidth={isMobile ? 0.75 : 1}
         />
       </mesh>
     </>
