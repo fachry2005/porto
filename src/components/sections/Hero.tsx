@@ -82,9 +82,8 @@ export default function Hero({ showApp }: HeroProps) {
 
       {/* TEXT */}
       <div
-        className="md:max-w-[600px]"
+        className="w-full max-w-[60%] md:max-w-[600px]"
         style={{
-          width: "100%",
           position: "relative",
           zIndex: 5,
         }}
@@ -127,7 +126,7 @@ export default function Hero({ showApp }: HeroProps) {
               ease: [0.22, 1, 0.36, 1],
             }}
             style={{
-              fontSize: "clamp(32px, 6vw, 62px)",
+              fontSize: isMobile ? "clamp(24px, 6.5vw, 32px)" : "clamp(32px, 6vw, 62px)",
               fontWeight: 800,
               lineHeight: 1.05,
               color: "var(--text-primary)",
@@ -151,7 +150,7 @@ export default function Hero({ showApp }: HeroProps) {
               ease: [0.22, 1, 0.36, 1],
             }}
             style={{
-              fontSize: "clamp(32px, 6vw, 62px)",
+              fontSize: isMobile ? "clamp(24px, 6.5vw, 32px)" : "clamp(32px, 6vw, 62px)",
               fontWeight: 800,
               lineHeight: 1.05,
               color: "var(--text-secondary)",
@@ -251,11 +250,11 @@ export default function Hero({ showApp }: HeroProps) {
               transition={{ duration: 0.5 }}
               style={{
                 fontFamily: "'DM Mono', monospace",
-                fontSize: 11,
+                fontSize: isMobile ? 10 : 11,
                 color: "var(--text-secondary)",
                 border: "1px solid var(--border)",
                 borderRadius: 999,
-                padding: "5px 12px",
+                padding: isMobile ? "4px 9px" : "5px 12px",
                 backgroundColor: "var(--bg-card)",
               }}
             >
