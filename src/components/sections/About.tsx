@@ -310,36 +310,35 @@ export default function About() {
           </motion.div>
 
           {/* isi image/ poto profil */}
-          {!isMobile && (
-            <motion.div
-              variants={slideLeft}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: false }}
+          <motion.div
+            variants={isMobile ? fadeUp : slideLeft}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false }}
+            style={{
+              width: isMobile ? "100%" : "48%",
+              display: "flex",
+              justifyContent: isMobile ? "center" : "flex-end",
+              alignItems: "center",
+              marginTop: isMobile ? 18 : 0,
+            }}
+          >
+            {/* Natural blended photo - transparent background */}
+            <img
+              src="/assets/Foto Fachry About.png"
+              alt="Fachry Fariska Ilham"
               style={{
-                width: "48%",
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
+                width: isMobile ? 190 : 220,
+                height: "auto",
+                display: "block",
+                transform: isMobile ? "none" : "translateX(-20px)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 82%, transparent 100%)",
+                maskImage:
+                  "linear-gradient(to bottom, black 82%, transparent 100%)",
               }}
-            >
-              {/* Natural blended photo - transparent background */}
-              <img
-                src="/assets/Foto Fachry About.png"
-                alt="Fachry Fariska Ilham"
-                style={{
-                  width: 220,
-                  height: "auto",
-                  display: "block",
-                  transform: "translateX(-20px)",
-                  WebkitMaskImage:
-                    "linear-gradient(to bottom, black 82%, transparent 100%)",
-                  maskImage:
-                    "linear-gradient(to bottom, black 82%, transparent 100%)",
-                }}
-              />
-            </motion.div>
-          )}
+            />
+          </motion.div>
         </div>
 
         {/* CARDS */}
